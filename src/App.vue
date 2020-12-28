@@ -108,7 +108,7 @@ export default Vue.extend({
       this.setting = false;
     },
 
-    async uploadAndCrop(): void {
+    async uploadAndCrop(): Promise<void> {
       if (this.sourceFile) {
         try {
           this.uploading = true;
