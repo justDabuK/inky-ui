@@ -1,0 +1,6 @@
+api/default-api.ts
+base.ts
+configuration.ts
+model/body-upload-file-uploadfile-post.ts
+model/httpvalidation-error.ts
+model/validation-error.ts
