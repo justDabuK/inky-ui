@@ -14,6 +14,7 @@
         <v-tab-item key="current">
           <v-card class="px-2 mx-2">
             <div v-if="!loading">
+              <!-- TODO: make a datable out of this, that is sorted by the name -->
               <v-select
                 v-model="selectedImage"
                 :items="adjustedImages"
@@ -25,6 +26,7 @@
                   <span>{{ selectedImage }}</span>
                 </div>
                 <div>
+                  <!-- TODO: disable while no picture is selected -->
                   <v-btn
                     class="primary"
                     :loading="setting"
@@ -51,6 +53,8 @@
               <v-file-input v-model="sourceFile" show-size accept="image/*" />
             </div>
             <div>
+              <!-- TODO: disable while no file is selected -->
+              <!-- TODO: disable if file with same name already existst(use originals list for this) -->
               <v-btn
                 class="primary"
                 :loading="uploading || cropping"
