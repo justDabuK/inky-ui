@@ -37,10 +37,10 @@
               </div>
               <div style="display: flex">
                 <div class="pa-2">
-                  <!-- TODO: disable while no picture is selected -->
                   <v-btn
                     class="primary"
                     :loading="setting"
+                    :disabled="!selectedImage"
                     @click="setSelectedImage"
                     >Set</v-btn
                   >
@@ -60,18 +60,29 @@
         </v-tab-item>
         <v-tab-item key="upload">
           <v-card class="mx-2 px-2">
-            <div>
-              <v-file-input v-model="sourceFile" show-size accept="image/*" />
-            </div>
-            <div>
-              <!-- TODO: disable while no file is selected -->
-              <!-- TODO: disable if file with same name already existst(use originals list for this) -->
-              <v-btn
-                class="primary"
-                :loading="uploading || cropping"
-                @click="uploadAndCrop"
-                >upload and crop</v-btn
+            <div style="display: flex">
+              <div style="width: 50%" class="pa-4">
+                <v-file-input
+                  v-model="sourceFile"
+                  show-size
+                  accept="image/*"
+                  :rules="[notEmpty, alreadyExists]"
+                />
+              </div>
+              <div
+                style="display: flex; flex-direction: column; justify-content: center"
+                class="pa-4"
               >
+                <!-- TODO: disable while no file is selected -->
+                <!-- TODO: disable if file with same name already existst(use originals list for this) -->
+                <v-btn
+                  class="primary"
+                  :loading="uploading || cropping"
+                  :disabled="!sourceFile || alreadyExists(sourceFile)"
+                  @click="uploadAndCrop"
+                  >upload and crop</v-btn
+                >
+              </div>
             </div>
           </v-card>
         </v-tab-item>
@@ -98,6 +109,7 @@ export default Vue.extend({
       uploading: false,
       cropping: false,
       adjustedImages: [] as string[],
+      originalImages: [] as string[],
       selectedImage: "",
       sourceFile: undefined as File | undefined,
       headers: [
@@ -113,6 +125,7 @@ export default Vue.extend({
   },
   async created() {
     await this.getAdjustedImages();
+    await this.getOriginalImages();
   },
   computed: {
     availableImages(): { id: string; name: string }[] {
@@ -131,6 +144,15 @@ export default Vue.extend({
         data: string[];
       };
       this.adjustedImages = response.data;
+      this.loading = false;
+    },
+
+    async getOriginalImages(): Promise<void> {
+      this.loading = true;
+      const response = (await API.getImagesImagesOriginalGet()) as {
+        data: string[];
+      };
+      this.originalImages = response.data;
       this.loading = false;
     },
 
@@ -158,6 +180,7 @@ export default Vue.extend({
           this.cropping = false;
         }
       }
+      await this.getOriginalImages();
     },
 
     clickRow(item: { id: string; name: string }) {
@@ -168,6 +191,20 @@ export default Vue.extend({
       return {
         "list-selected": item.id === this.selectedImage
       };
+    },
+
+    alreadyExists(sourceFile: File): boolean | string {
+      if (this.originalImages.includes(sourceFile.name)) {
+        return "Image with this name already exists";
+      }
+      return true;
+    },
+
+    notEmpty(sourceFile: File): boolean | string {
+      if (!sourceFile) {
+        return "You cannot upload an empty file";
+      }
+      return true;
     }
   }
 });
