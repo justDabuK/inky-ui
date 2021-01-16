@@ -5,13 +5,13 @@
         <v-app-bar-title>inky UI</v-app-bar-title>
         <template #extension>
           <v-tabs align-with-title v-model="tab">
-            <v-tab key="current">current</v-tab>
+            <v-tab key="select">select</v-tab>
             <v-tab key="upload">upload</v-tab>
           </v-tabs>
         </template>
       </v-app-bar>
       <v-tabs-items v-model="tab">
-        <v-tab-item key="current">
+        <v-tab-item key="select">
           <v-card class="px-2 mx-2">
             <div v-if="!loading">
               <div class="list-container">
@@ -73,8 +73,6 @@
                 style="display: flex; flex-direction: column; justify-content: center"
                 class="pa-4"
               >
-                <!-- TODO: disable while no file is selected -->
-                <!-- TODO: disable if file with same name already existst(use originals list for this) -->
                 <v-btn
                   class="primary"
                   :loading="uploading || cropping"
