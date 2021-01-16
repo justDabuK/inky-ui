@@ -9,8 +9,10 @@
     "generate:client": "openapi-generator-cli generate"
   },
   "dependencies": {
-    "@openapitools/openapi-generator-cli": "^2.1.15",
+    "@openapitools/openapi-generator-cli": "^2.1.17",
+    "@types/lodash": "^4.14.167",
     "core-js": "^3.6.5",
+    "lodash": "^4.17.20",
     "vue": "^2.6.11",
     "vuetify": "^2.2.11"
   },

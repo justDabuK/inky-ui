@@ -14,18 +14,29 @@
         <v-tab-item key="current">
           <v-card class="px-2 mx-2">
             <div v-if="!loading">
-              <!-- TODO: make a datable out of this, that is sorted by the name -->
-              <v-select
-                v-model="selectedImage"
-                :items="adjustedImages"
-                label="Adjusted Images"
-              />
-              <div>
-                <div>
-                  <span>Image to set</span>
-                  <span>{{ selectedImage }}</span>
-                </div>
-                <div>
+              <div class="list-container">
+                <v-data-table
+                  :items="availableImages"
+                  :headers="headers"
+                  :search="search"
+                  :item-class="itemClass"
+                  @click:row="clickRow"
+                >
+                  <template #top>
+                    <v-text-field
+                      v-model="search"
+                      label="Search"
+                      class="mx-4"
+                    />
+                  </template>
+                </v-data-table>
+              </div>
+              <div class="pa-2" style="display: flex">
+                <span>Image to set</span>
+                <span class="px-2">{{ selectedImage }}</span>
+              </div>
+              <div style="display: flex">
+                <div class="pa-2">
                   <!-- TODO: disable while no picture is selected -->
                   <v-btn
                     class="primary"
@@ -34,7 +45,7 @@
                     >Set</v-btn
                   >
                 </div>
-                <div>
+                <div class="pa-2">
                   <v-btn :loading="loading" @click="getAdjustedImages"
                     >reload images</v-btn
                   >
@@ -66,15 +77,13 @@
         </v-tab-item>
       </v-tabs-items>
     </v-card>
-    <v-btn fab class="bottom-right primary" disabled>
-      <v-icon>mdi-plus</v-icon>
-    </v-btn>
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import { API } from "@/services/backend-service";
+import _ from "lodash";
 
 export default Vue.extend({
   name: "App",
@@ -90,11 +99,30 @@ export default Vue.extend({
       cropping: false,
       adjustedImages: [] as string[],
       selectedImage: "",
-      sourceFile: undefined as File | undefined
+      sourceFile: undefined as File | undefined,
+      headers: [
+        {
+          text: "Name",
+          align: "start",
+          sortable: true,
+          value: "name"
+        }
+      ],
+      search: ""
     };
   },
   async created() {
     await this.getAdjustedImages();
+  },
+  computed: {
+    availableImages(): { id: string; name: string }[] {
+      return this.adjustedImages.map(img => {
+        return {
+          id: img,
+          name: _.upperFirst(_.lowerCase(img.split(".")[0]))
+        };
+      });
+    }
   },
   methods: {
     async getAdjustedImages(): Promise<void> {
@@ -130,15 +158,28 @@ export default Vue.extend({
           this.cropping = false;
         }
       }
+    },
+
+    clickRow(item: { id: string; name: string }) {
+      this.selectedImage = item.id;
+    },
+
+    itemClass(item: { id: string; name: string }): Record<string, boolean> {
+      return {
+        "list-selected": item.id === this.selectedImage
+      };
     }
   }
 });
 </script>
 
 <style scoped>
-.bottom-right {
-  position: absolute;
-  bottom: 1em;
-  right: 1em;
+.list-container >>> tbody > tr:hover:not(.list-selected) {
+  background-color: var(--v-primary-lighten3) !important;
+}
+
+.list-container >>> .list-selected {
+  background-color: var(--v-primary-lighten1) !important;
+  color: white !important;
 }
 </style>
