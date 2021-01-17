@@ -66,7 +66,7 @@
                   v-model="sourceFile"
                   show-size
                   accept="image/*"
-                  :rules="[notEmpty, alreadyExists]"
+                  :rules="[notEmpty, nameNotGiven]"
                 />
               </div>
               <div
@@ -76,7 +76,7 @@
                 <v-btn
                   class="primary"
                   :loading="uploading || cropping"
-                  :disabled="!sourceFile || alreadyExists(sourceFile)"
+                  :disabled="!sourceFile || !nameNotGiven(sourceFile)"
                   @click="uploadAndCrop"
                   >upload and crop</v-btn
                 >
@@ -191,7 +191,7 @@ export default Vue.extend({
       };
     },
 
-    alreadyExists(sourceFile: File): boolean | string {
+    nameNotGiven(sourceFile: File): boolean | string {
       if (this.originalImages.includes(sourceFile.name)) {
         return "Image with this name already exists";
       }
