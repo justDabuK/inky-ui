@@ -12,51 +12,14 @@
       </v-app-bar>
       <v-tabs-items v-model="tab">
         <v-tab-item key="select">
-          <v-card class="px-2 mx-2">
-            <div v-if="!loading">
-              <div class="list-container">
-                <v-data-table
-                  :items="availableImages"
-                  :headers="headers"
-                  :search="search"
-                  :item-class="itemClass"
-                  @click:row="clickRow"
-                >
-                  <template #top>
-                    <v-text-field
-                      v-model="search"
-                      label="Search"
-                      class="mx-4"
-                    />
-                  </template>
-                </v-data-table>
-              </div>
-              <div class="pa-2" style="display: flex">
-                <span>Image to set</span>
-                <span class="px-2">{{ selectedImage }}</span>
-              </div>
-              <div style="display: flex">
-                <div class="pa-2">
-                  <v-btn
-                    class="primary"
-                    :loading="setting"
-                    :disabled="!selectedImage"
-                    @click="setSelectedImage"
-                    >Set</v-btn
-                  >
-                </div>
-                <div class="pa-2">
-                  <v-btn :loading="loading" @click="getAdjustedImages"
-                    >reload images</v-btn
-                  >
-                </div>
-              </div>
-            </div>
-            <div v-else>
-              <span>Die aktuellen Bilder werden geladen</span>
-              <v-skeleton-loader type="list-item" />
-            </div>
-          </v-card>
+          <selection-panel
+            :available-images="availableImages"
+            :headers="headers"
+            :setting="setting"
+            :loading="loading"
+            @set-selected-image="setSelectedImage"
+            @update-images="updateImages"
+          />
         </v-tab-item>
         <v-tab-item key="upload">
           <v-card class="mx-2 px-2">
@@ -93,11 +56,12 @@
 import Vue from "vue";
 import { API } from "@/services/backend-service";
 import _ from "lodash";
+import SelectionPanel from "@/components/SelectionPanel.vue";
 
 export default Vue.extend({
   name: "App",
 
-  components: {},
+  components: { SelectionPanel },
 
   data() {
     return {
@@ -108,7 +72,6 @@ export default Vue.extend({
       cropping: false,
       adjustedImages: [] as string[],
       originalImages: [] as string[],
-      selectedImage: "",
       sourceFile: undefined as File | undefined,
       headers: [
         {
@@ -117,13 +80,11 @@ export default Vue.extend({
           sortable: true,
           value: "name"
         }
-      ],
-      search: ""
+      ]
     };
   },
   async created() {
-    await this.getAdjustedImages();
-    await this.getOriginalImages();
+    await this.updateImages();
   },
   computed: {
     availableImages(): { id: string; name: string }[] {
@@ -154,9 +115,14 @@ export default Vue.extend({
       this.loading = false;
     },
 
-    async setSelectedImage(): Promise<void> {
+    async updateImages(): Promise<void> {
+      await this.getAdjustedImages();
+      await this.getOriginalImages();
+    },
+
+    async setSelectedImage(imageName: string): Promise<void> {
       this.setting = true;
-      await API.setImageImagesSetImageNamePut(this.selectedImage);
+      await API.setImageImagesSetImageNamePut(imageName);
       this.setting = false;
     },
 
@@ -178,17 +144,7 @@ export default Vue.extend({
           this.cropping = false;
         }
       }
-      await this.getOriginalImages();
-    },
-
-    clickRow(item: { id: string; name: string }) {
-      this.selectedImage = item.id;
-    },
-
-    itemClass(item: { id: string; name: string }): Record<string, boolean> {
-      return {
-        "list-selected": item.id === this.selectedImage
-      };
+      await this.updateImages();
     },
 
     nameNotGiven(sourceFile: File): boolean | string {
@@ -207,14 +163,3 @@ export default Vue.extend({
   }
 });
 </script>
-
-<style scoped>
-.list-container >>> tbody > tr:hover:not(.list-selected) {
-  background-color: var(--v-primary-lighten3) !important;
-}
-
-.list-container >>> .list-selected {
-  background-color: var(--v-primary-lighten1) !important;
-  color: white !important;
-}
-</style>
