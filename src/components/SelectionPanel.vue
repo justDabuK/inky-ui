@@ -35,12 +35,14 @@
         </div>
       </div>
       <div class="d-flex justify-center">
-        <div class="pa-2" style="transform: rotate(-90deg);">
-          <v-img
-            v-if="selectedImage"
-            :src="getAdjustedDownloadPath(selectedImage)"
-          />
-        </div>
+        <v-card>
+          <div class="pa-2" style="transform: rotate(-90deg); margin-top: 5em">
+            <v-img
+              v-if="selectedImage"
+              :src="getAdjustedDownloadPath(selectedImage)"
+            />
+          </div>
+        </v-card>
       </div>
     </div>
     <div v-else>
