@@ -70,11 +70,53 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Get Images
+         * @summary Get Adjusted Image File
+         * @param {string} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getImagesImagesAdjustedGet: async (options: any = {}): Promise<RequestArgs> => {
+        getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet: async (imageName: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'imageName' is not null or undefined
+            if (imageName === null || imageName === undefined) {
+                throw new RequiredError('imageName','Required parameter imageName was null or undefined when calling getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet.');
+            }
+            const localVarPath = `/images/adjusted/get/{image_name}/download`
+                .replace(`{${"image_name"}}`, encodeURIComponent(String(imageName)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get Adjusted Images
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAdjustedImagesImagesAdjustedGet: async (options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/images/adjusted/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -106,11 +148,53 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Get Images
+         * @summary Get Original Image File
+         * @param {string} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getImagesImagesOriginalGet: async (options: any = {}): Promise<RequestArgs> => {
+        getOriginalImageFileImagesOriginalGetImageNameDownloadGet: async (imageName: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'imageName' is not null or undefined
+            if (imageName === null || imageName === undefined) {
+                throw new RequiredError('imageName','Required parameter imageName was null or undefined when calling getOriginalImageFileImagesOriginalGetImageNameDownloadGet.');
+            }
+            const localVarPath = `/images/original/get/{image_name}/download`
+                .replace(`{${"image_name"}}`, encodeURIComponent(String(imageName)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get Original Images
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOriginalImagesImagesOriginalGet: async (options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/images/original/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -334,12 +418,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get Images
+         * @summary Get Adjusted Image File
+         * @param {string} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getImagesImagesAdjustedGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getImagesImagesAdjustedGet(options);
+        async getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -347,12 +432,39 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get Images
+         * @summary Get Adjusted Images
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getImagesImagesOriginalGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getImagesImagesOriginalGet(options);
+        async getAdjustedImagesImagesAdjustedGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getAdjustedImagesImagesAdjustedGet(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary Get Original Image File
+         * @param {string} imageName 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary Get Original Images
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getOriginalImagesImagesOriginalGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getOriginalImagesImagesOriginalGet(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -434,21 +546,41 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary Get Images
+         * @summary Get Adjusted Image File
+         * @param {string} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getImagesImagesAdjustedGet(options?: any): AxiosPromise<any> {
-            return DefaultApiFp(configuration).getImagesImagesAdjustedGet(options).then((request) => request(axios, basePath));
+        getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName: string, options?: any): AxiosPromise<any> {
+            return DefaultApiFp(configuration).getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Get Images
+         * @summary Get Adjusted Images
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getImagesImagesOriginalGet(options?: any): AxiosPromise<any> {
-            return DefaultApiFp(configuration).getImagesImagesOriginalGet(options).then((request) => request(axios, basePath));
+        getAdjustedImagesImagesAdjustedGet(options?: any): AxiosPromise<any> {
+            return DefaultApiFp(configuration).getAdjustedImagesImagesAdjustedGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get Original Image File
+         * @param {string} imageName 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName: string, options?: any): AxiosPromise<any> {
+            return DefaultApiFp(configuration).getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get Original Images
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOriginalImagesImagesOriginalGet(options?: any): AxiosPromise<any> {
+            return DefaultApiFp(configuration).getOriginalImagesImagesOriginalGet(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -513,24 +645,48 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
-     * @summary Get Images
+     * @summary Get Adjusted Image File
+     * @param {string} imageName 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public getImagesImagesAdjustedGet(options?: any) {
-        return DefaultApiFp(this.configuration).getImagesImagesAdjustedGet(options).then((request) => request(this.axios, this.basePath));
+    public getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName: string, options?: any) {
+        return DefaultApiFp(this.configuration).getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Get Images
+     * @summary Get Adjusted Images
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public getImagesImagesOriginalGet(options?: any) {
-        return DefaultApiFp(this.configuration).getImagesImagesOriginalGet(options).then((request) => request(this.axios, this.basePath));
+    public getAdjustedImagesImagesAdjustedGet(options?: any) {
+        return DefaultApiFp(this.configuration).getAdjustedImagesImagesAdjustedGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get Original Image File
+     * @param {string} imageName 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName: string, options?: any) {
+        return DefaultApiFp(this.configuration).getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get Original Images
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getOriginalImagesImagesOriginalGet(options?: any) {
+        return DefaultApiFp(this.configuration).getOriginalImagesImagesOriginalGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -170,8 +170,8 @@
     },
     "/images/original/": {
       "get": {
-        "summary": "Get Images",
-        "operationId": "get_images_images_original__get",
+        "summary": "Get Original Images",
+        "operationId": "get_original_images_images_original__get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -186,14 +186,88 @@
     },
     "/images/adjusted/": {
       "get": {
-        "summary": "Get Images",
-        "operationId": "get_images_images_adjusted__get",
+        "summary": "Get Adjusted Images",
+        "operationId": "get_adjusted_images_images_adjusted__get",
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/images/adjusted/get/{image_name}/download": {
+      "get": {
+        "summary": "Get Adjusted Image File",
+        "operationId": "get_adjusted_image_file_images_adjusted_get__image_name__download_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Image Name",
+              "type": "string"
+            },
+            "name": "image_name",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/images/original/get/{image_name}/download": {
+      "get": {
+        "summary": "Get Original Image File",
+        "operationId": "get_original_image_file_images_original_get__image_name__download_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Image Name",
+              "type": "string"
+            },
+            "name": "image_name",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
