@@ -22,30 +22,12 @@
           />
         </v-tab-item>
         <v-tab-item key="upload">
-          <v-card class="mx-2 px-2">
-            <div style="display: flex">
-              <div style="width: 50%" class="pa-4">
-                <v-file-input
-                  v-model="sourceFile"
-                  show-size
-                  accept="image/*"
-                  :rules="[notEmpty, nameNotGiven]"
-                />
-              </div>
-              <div
-                style="display: flex; flex-direction: column; justify-content: center"
-                class="pa-4"
-              >
-                <v-btn
-                  class="primary"
-                  :loading="uploading || cropping"
-                  :disabled="!sourceFile || !nameNotGiven(sourceFile)"
-                  @click="uploadAndCrop"
-                  >upload and crop</v-btn
-                >
-              </div>
-            </div>
-          </v-card>
+          <upload-panel
+            :original-images="originalImages"
+            :uploading="uploading"
+            :cropping="cropping"
+            @upload-and-crop="uploadAndCrop"
+          />
         </v-tab-item>
       </v-tabs-items>
     </v-card>
@@ -57,11 +39,12 @@ import Vue from "vue";
 import { API } from "@/services/backend-service";
 import _ from "lodash";
 import SelectionPanel from "@/components/SelectionPanel.vue";
+import UploadPanel from "@/components/UploadPanel.vue";
 
 export default Vue.extend({
   name: "App",
 
-  components: { SelectionPanel },
+  components: { UploadPanel, SelectionPanel },
 
   data() {
     return {
@@ -72,7 +55,6 @@ export default Vue.extend({
       cropping: false,
       adjustedImages: [] as string[],
       originalImages: [] as string[],
-      sourceFile: undefined as File | undefined,
       headers: [
         {
           text: "Name",
@@ -126,16 +108,14 @@ export default Vue.extend({
       this.setting = false;
     },
 
-    async uploadAndCrop(): Promise<void> {
-      if (this.sourceFile) {
+    async uploadAndCrop(sourceFile: File | undefined): Promise<void> {
+      if (sourceFile) {
         try {
           this.uploading = true;
-          await API.uploadFileUploadfilePost(this.sourceFile);
+          await API.uploadFileUploadfilePost(sourceFile);
           this.uploading = false;
           this.cropping = true;
-          await API.cropImageForInkyImagesCropImageNamePut(
-            this.sourceFile.name
-          );
+          await API.cropImageForInkyImagesCropImageNamePut(sourceFile.name);
           this.cropping = false;
         } catch (exception) {
           throw new Error(exception);
@@ -145,20 +125,6 @@ export default Vue.extend({
         }
       }
       await this.updateImages();
-    },
-
-    nameNotGiven(sourceFile: File): boolean | string {
-      if (this.originalImages.includes(sourceFile.name)) {
-        return "Image with this name already exists";
-      }
-      return true;
-    },
-
-    notEmpty(sourceFile: File): boolean | string {
-      if (!sourceFile) {
-        return "You cannot upload an empty file";
-      }
-      return true;
     }
   }
 });
