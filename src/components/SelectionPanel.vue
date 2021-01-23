@@ -34,6 +34,14 @@
           </v-btn>
         </div>
       </div>
+      <div class="d-flex justify-center">
+        <div class="pa-2" style="transform: rotate(-90deg);">
+          <v-img
+            v-if="selectedImage"
+            :src="getAdjustedDownloadPath(selectedImage)"
+          />
+        </div>
+      </div>
     </div>
     <div v-else>
       <span>Die aktuellen Bilder werden geladen</span>
@@ -44,6 +52,7 @@
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
+import { getAdjustedDownloadPath } from "@/services/backend-service";
 
 export default Vue.extend({
   props: {
@@ -71,6 +80,8 @@ export default Vue.extend({
     };
   },
   methods: {
+    getAdjustedDownloadPath,
+
     clickRow(item: { id: string; name: string }) {
       this.selectedImage = item.id;
     },

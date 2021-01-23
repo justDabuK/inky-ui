@@ -77,7 +77,7 @@ export default Vue.extend({
   methods: {
     async getAdjustedImages(): Promise<void> {
       this.loading = true;
-      const response = (await API.getImagesImagesAdjustedGet()) as {
+      const response = (await API.getAdjustedImagesImagesAdjustedGet()) as {
         data: string[];
       };
       this.adjustedImages = response.data;
@@ -86,7 +86,7 @@ export default Vue.extend({
 
     async getOriginalImages(): Promise<void> {
       this.loading = true;
-      const response = (await API.getImagesImagesOriginalGet()) as {
+      const response = (await API.getOriginalImagesImagesOriginalGet()) as {
         data: string[];
       };
       this.originalImages = response.data;
