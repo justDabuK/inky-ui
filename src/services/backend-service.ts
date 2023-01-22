@@ -1,10 +1,12 @@
-import { DefaultApi } from './backend/generated';
+import { Configuration, DefaultApi } from './backend/generated';
 
-const BASE_PATH = 'http://192.168.178.66:8000';
+const BASE_PATH = 'http://192.168.178.30:8000';
 
-export const API = new DefaultApi({
-  basePath: BASE_PATH,
-});
+export const API = new DefaultApi(
+  new Configuration({
+    basePath: BASE_PATH,
+  })
+);
 
 export function getAdjustedDownloadPath(imageName: string) {
   return `${BASE_PATH}/images/adjusted/get/${imageName}/download`;
