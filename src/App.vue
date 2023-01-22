@@ -1,15 +1,14 @@
 <template>
   <div>
     <span>Liste der angepassten Bilder</span>
-    <div class="flex flex-col">
-      <span v-for="imageName in adjustedImages" :key="imageName"> {{imageName}} </span>
-    </div>
+    <image-list :image-name-list="adjustedImages" />
   </div>
 </template>
 
 <script setup lang="ts">
 import {API} from "./services/backend-service";
 import {onMounted, ref} from "vue";
+import ImageList from "./components/ImageList.vue";
 
 const adjustedImages = ref<string[]>([]);
 

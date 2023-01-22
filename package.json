@@ -10,10 +10,13 @@
     "generate:client": "openapi-generator-cli generate"
   },
   "dependencies": {
-    "vue": "^3.2.45"
+    "lodash": "^4.17.21",
+    "vue": "^3.2.45",
+    "vue-material-design-icons": "^5.1.2"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.5.2",
+    "@types/lodash": "^4.14.191",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "@vitejs/plugin-vue": "^4.0.0",
