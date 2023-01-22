@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="flex flex-col">
+    <file-input class="mb-8"/>
     <span>Liste der angepassten Bilder</span>
     <image-list :image-name-list="adjustedImages" />
   </div>
@@ -9,6 +10,7 @@
 import {API} from "./services/backend-service";
 import {onMounted, ref} from "vue";
 import ImageList from "./components/ImageList.vue";
+import FileInput from "./components/FileInput.vue";
 
 const adjustedImages = ref<string[]>([]);
 

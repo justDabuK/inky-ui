@@ -6,6 +6,6 @@
 
 <script setup lang="ts">
 defineProps<{
-  disabled: boolean
+  disabled?: boolean
 }>()
 </script>
