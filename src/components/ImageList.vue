@@ -5,12 +5,12 @@
     </div>
     <div class="flex justify-between items-center">
       <div class="flex">
-        <button class="disabled:opacity-50" @click="previousPage" :disabled="disablePrevious">
+        <base-button :disabled="disablePrevious" @click="previousPage">
           <chevron-left />
-        </button>
-        <button class="disabled:opacity-50" @click="nextPage" :disabled="disableNext">
+        </base-button>
+        <base-button :disabled="disableNext" @click="nextPage">
           <chevron-right />
-        </button>
+        </base-button>
       </div>
       <span >{{`${pageNumber}/${pageCount}`}}</span>
     </div>
@@ -19,6 +19,7 @@
 
 <script setup lang="ts">
 import ImageItem from "./ImageItem.vue";
+import BaseButton from "./base/BaseButton.vue";
 import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
 import ChevronRight from 'vue-material-design-icons/ChevronRight.vue'
 import {computed, ref} from "vue";
