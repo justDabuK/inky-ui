@@ -1,0 +1,335 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/images/set/{image_name}": {
+      "put": {
+        "summary": "Set Image",
+        "operationId": "set_image_images_set__image_name__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Image Name",
+              "type": "string"
+            },
+            "name": "image_name",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/images/set/random/": {
+      "put": {
+        "summary": "Set Random Image",
+        "operationId": "set_random_image_images_set_random__put",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/images/crop/{image_name}": {
+      "put": {
+        "summary": "Crop Image For Inky",
+        "operationId": "crop_image_for_inky_images_crop__image_name__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Image Name",
+              "type": "string"
+            },
+            "name": "image_name",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/images/resize/{image_name}": {
+      "put": {
+        "summary": "Resize Image For Inky",
+        "operationId": "resize_image_for_inky_images_resize__image_name__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Image Name",
+              "type": "string"
+            },
+            "name": "image_name",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/uploadfile/": {
+      "post": {
+        "summary": "Upload File",
+        "operationId": "upload_file_uploadfile__post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_file_uploadfile__post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/images/original/": {
+      "get": {
+        "summary": "Get Original Images",
+        "operationId": "get_original_images_images_original__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/images/adjusted/": {
+      "get": {
+        "summary": "Get Adjusted Images",
+        "operationId": "get_adjusted_images_images_adjusted__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/images/adjusted/get/{image_name}/download": {
+      "get": {
+        "summary": "Get Adjusted Image File",
+        "operationId": "get_adjusted_image_file_images_adjusted_get__image_name__download_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Image Name",
+              "type": "string"
+            },
+            "name": "image_name",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/images/original/get/{image_name}/download": {
+      "get": {
+        "summary": "Get Original Image File",
+        "operationId": "get_original_image_file_images_original_get__image_name__download_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Image Name",
+              "type": "string"
+            },
+            "name": "image_name",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_upload_file_uploadfile__post": {
+        "title": "Body_upload_file_uploadfile__post",
+        "required": [
+          "file"
+        ],
+        "type": "object",
+        "properties": {
+          "file": {
+            "title": "File",
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
