@@ -1,4 +1,8 @@
 <template>
+  <!-- TODO: support selecting an item -->
+  <!-- TODO: support setting the selected item -->
+  <!-- TODO: support searching for an object -->
+  <!-- TODO: preview selected item -->
   <div class="flex flex-col">
     <div class="flex flex-col">
       <image-item v-for="imageName in paginatedList" :key="imageName" :image-name="imageName" />

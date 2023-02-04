@@ -3,6 +3,7 @@
     <file-input class="mb-8"/>
     <span>Liste der angepassten Bilder</span>
     <image-list :image-name-list="adjustedImages" />
+    <!-- TODO: add gallery component-->
   </div>
 </template>
 
