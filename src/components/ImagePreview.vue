@@ -1,6 +1,7 @@
 <template>
   <!-- TODO: support setting the item -->
   <!-- TODO: make name and "set"-button only appear on hover -->
+  <!-- TODO: support deleting items -->
   <div v-if="imageName" ref="imageContainer" class="relative">
     <img ref="image" :src="getOriginalDownloadPath(imageName)" alt="first image" class="rounded w-[448px] h-[600px] object-none"/>
     <span class="image-name absolute rounded bg-gray-800/90 bottom-4 right-4 px-4">{{visibleName}}</span>
