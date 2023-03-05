@@ -1,11 +1,11 @@
 <template>
   <div>
     <base-button @click="onPickFile">choose pictures</base-button>
-    <input type="file" class="hidden" ref="fileInput" accept="image/*" @change="onFilePicked" multiple/>
+    <input ref="fileInput" type="file" class="hidden" accept="image/*" multiple @change="onFilePicked"/>
     <div v-if="imageList.length > 0" class="flex flex-col">
       <span>Files to upload</span>
       <file-item v-for="imageFile in imageList" :key="imageFile.name" :file="imageFile" :existing-image-names="existingImageNames"/>
-      <base-button @click="uploadFiles" :disabled="uploadingImages">
+      <base-button :disabled="uploadingImages" @click="uploadFiles">
         <progress-upload v-if="uploadingImages" />
         <span v-else>Upload images</span>
       </base-button>
@@ -17,7 +17,7 @@
 import BaseButton from "./base/BaseButton.vue";
 import FileItem from "./FileItem.vue";
 import {onMounted, ref} from "vue";
-import {API} from "../services/backend-service";
+import {API} from "@/services/backend-service";
 import ProgressUpload from "vue-material-design-icons/ProgressUpload.vue"
 
 const imageUrl = ref<string | ArrayBuffer | null>(null);
