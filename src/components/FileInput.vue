@@ -41,7 +41,7 @@ const emit = defineEmits<{
   (evt: 'uploaded-files'): void
 }>()
 const imageList = ref<File[]>([]);
-const fileUrlList = ref<(string | ArrayBuffer)[]>([]);
+const fileUrlList = ref<(string)[]>([]);
 const uploadingImages = ref<boolean>(false);
 
 const fileInput = ref<HTMLInputElement>();
@@ -61,7 +61,7 @@ function onFilePicked(event: Event) {
       const fileReader = new FileReader();
       fileReader.addEventListener('load', () => {
         if(fileReader.result) {
-          fileUrlList.value.push(fileReader.result);
+          fileUrlList.value.push(fileReader.result as unknown as string);
         }
       });
       fileReader.readAsDataURL(files[i]);

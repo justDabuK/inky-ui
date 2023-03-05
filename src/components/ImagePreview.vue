@@ -17,7 +17,7 @@ import _ from "lodash";
 
 
 const props = defineProps<{
-  src: string | ArrayBuffer,
+  src: string,
   imageName: string,
 }>();
 
