@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO: support searching for an object -->
   <div class="flex flex-col gap-10">
     <div class="flex justify-center">
       <input v-model="searchTerm" placeholder="enter a search term" class="p-2 rounded"/>
