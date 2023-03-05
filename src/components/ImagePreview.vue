@@ -1,9 +1,9 @@
 <template>
   <!-- TODO: support setting the item -->
   <!-- TODO: make name and "set"-button only appear on hover -->
-  <div v-if="imageName" ref="imageContainer" class="relative image-container">
-    <img ref="image" :src="getOriginalDownloadPath(imageName)" alt="first image" class="image"/>
-    <span class="image-name">{{visibleName}}</span>
+  <div v-if="imageName" ref="imageContainer" class="relative">
+    <img ref="image" :src="getOriginalDownloadPath(imageName)" alt="first image" class="rounded w-[448px] h-[600px] object-none"/>
+    <span class="image-name absolute rounded bg-gray-800/90 bottom-4 right-4 px-4">{{visibleName}}</span>
   </div>
 </template>
 
@@ -20,21 +20,3 @@ const props = defineProps<{
 const visibleName = computed(() => _.upperFirst(_.lowerCase(props.imageName.split('.')[0])))
 
 </script>
-<style>
-.image {
-  width: 448px;
-  height: 600px;
-  border-radius: 5px;
-  object-fit: none;
-}
-
-.image-name {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background-color: black;
-  color: white;
-  padding: 0 20px;
-  border-radius: 5px;
-}
-</style>
