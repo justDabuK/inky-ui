@@ -6,9 +6,16 @@
     </div>
 
     <input ref="fileInput" type="file" class="hidden" accept="image/*" multiple @change="onFilePicked"/>
-    <div v-if="imageList.length > 0" class="flex flex-col">
+    <div v-if="imageList.length > 0" class="flex flex-col gap-10">
       <span>Files to upload</span>
-      <file-item v-for="imageFile in imageList" :key="imageFile.name" :file="imageFile" :existing-image-names="existingImageNames"/>
+      <div class="grid grid-cols-3 gap-5">
+        <!-- TODO: name and picture mismatch -->
+        <image-preview v-for="(url, index) in fileUrlList" :key="url" :image-name="imageList[index].name" :src="url" >
+          <span>({{sizeInKb(imageList[index])}} KB)</span>
+          <check v-if="fileAlreadyExists(imageList[index].name)" />
+          <upload v-else />
+        </image-preview>
+      </div>
       <base-button :disabled="uploadingImages" @click="uploadFiles">
         <progress-upload v-if="uploadingImages" />
         <span v-else>Upload images</span>
@@ -19,20 +26,29 @@
 
 <script setup lang="ts">
 import BaseButton from "./base/BaseButton.vue";
-import FileItem from "./FileItem.vue";
-import {onMounted, ref} from "vue";
-import {API} from "../services/backend-service";
+import ImagePreview from "./ImagePreview.vue";
+import { ref } from "vue";
+import { API } from "../services/backend-service";
 import ProgressUpload from "vue-material-design-icons/ProgressUpload.vue"
+import Check from "vue-material-design-icons/Check.vue";
+import Upload from "vue-material-design-icons/Upload.vue";
 
-const imageUrl = ref<string | ArrayBuffer | null>(null);
+const props = defineProps<{
+  existingImageNames: string[],
+}>()
+
+const emit = defineEmits<{
+  (evt: 'uploaded-files'): void
+}>()
 const imageList = ref<File[]>([]);
-const existingImageNames = ref<string[]>([]);
+const fileUrlList = ref<(string | ArrayBuffer)[]>([]);
 const uploadingImages = ref<boolean>(false);
 
 const fileInput = ref<HTMLInputElement>();
 
 function onPickFile() {
   imageList.value = [];
+  fileUrlList.value = [];
   if(fileInput.value) {
     fileInput.value.click();
   }
@@ -41,22 +57,24 @@ function onPickFile() {
 function onFilePicked(event: Event) {
   const files = (event.target as HTMLInputElement).files;
   if(files !== null) {
-    const fileReader = new FileReader();
-    fileReader.addEventListener('load', () => {
-      imageUrl.value = fileReader.result;
-    })
-    fileReader.readAsDataURL(files[0]);
     for( let i = 0; i< files.length; i++) {
+      const fileReader = new FileReader();
+      fileReader.addEventListener('load', () => {
+        if(fileReader.result) {
+          fileUrlList.value.push(fileReader.result);
+        }
+      });
+      fileReader.readAsDataURL(files[i]);
       imageList.value.push(files[i]);
     }
   }
 }
 
 async function uploadFiles() {
-  if(existingImageNames.value.length > 0) {
+  if(props.existingImageNames.length > 0) {
     uploadingImages.value = true;
     imageList.value.forEach( async (imageFile) => {
-      if(!existingImageNames.value.includes(imageFile.name)) {
+      if(!props.existingImageNames.includes(imageFile.name)) {
         try {
           await API.uploadFileUploadfilePost(imageFile);
           await API.cropImageForInkyImagesCropImageNamePut(imageFile.name);
@@ -70,9 +88,14 @@ async function uploadFiles() {
 }
 
 async function updateExistingImageNames() {
-  const response = await API.getOriginalImagesImagesOriginalGet();
-  existingImageNames.value = response.data;
+  emit('uploaded-files');
 }
 
-onMounted(updateExistingImageNames);
+function fileAlreadyExists(name: string) {
+  return props.existingImageNames.includes(name);
+}
+
+function sizeInKb(file: File) {
+  return Math.floor(file.size / 1024);
+}
 </script>

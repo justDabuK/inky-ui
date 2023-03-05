@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-10">
     <h1 class="text-5xl">Inky UI</h1>
-    <file-input class="mb-8"/>
+    <file-input class="mb-8" :existing-image-names="originalImages" @uploaded-files="updateLists"/>
     <image-list :image-name-list="originalImages" />
   </div>
 </template>
@@ -15,10 +15,12 @@ import FileInput from "./components/FileInput.vue";
 const adjustedImages = ref<string[]>([]);
 const originalImages = ref<string[]>([]);
 
-onMounted(async () => {
+const updateLists = async () => {
   adjustedImages.value = (await API.getAdjustedImagesImagesAdjustedGet()).data;
   originalImages.value = (await API.getOriginalImagesImagesOriginalGet()).data;
-})
+}
+
+onMounted(updateLists)
 </script>
 
 <style scoped>
