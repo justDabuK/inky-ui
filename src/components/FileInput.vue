@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <base-button @click="onPickFile">choose pictures</base-button>
+  <div class="flex flex-col gap-5">
+    <h2 class="text-xl">Image upload</h2>
+    <div>
+      <base-button @click="onPickFile">choose pictures</base-button>
+    </div>
+
     <input ref="fileInput" type="file" class="hidden" accept="image/*" multiple @change="onFilePicked"/>
     <div v-if="imageList.length > 0" class="flex flex-col">
       <span>Files to upload</span>

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-10">
+    <h1 class="text-5xl">Inky UI</h1>
     <file-input class="mb-8"/>
-    <span>Liste der angepassten Bilder</span>
     <image-list :image-name-list="originalImages" />
   </div>
 </template>

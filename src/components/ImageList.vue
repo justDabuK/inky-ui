@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-col gap-10">
+    <h2 class="text-xl">List of images</h2>
     <div class="flex justify-center">
       <input v-model="searchTerm" placeholder="enter a search term" class="p-2 rounded"/>
     </div>
