@@ -11,3 +11,7 @@ export const API = new DefaultApi(
 export function getAdjustedDownloadPath(imageName: string) {
   return `${BASE_PATH}/images/adjusted/get/${imageName}/download`;
 }
+
+export function getOriginalDownloadPath(imageName: string) {
+  return `${BASE_PATH}/images/original/get/${imageName}/download`;
+}

@@ -1,12 +1,6 @@
 <template>
-  <!-- TODO: support selecting an item -->
-  <!-- TODO: support setting the selected item -->
   <!-- TODO: support searching for an object -->
-  <!-- TODO: preview selected item -->
-  <div class="flex flex-col">
-    <div class="flex flex-col">
-      <image-item v-for="imageName in paginatedList" :key="imageName" :image-name="imageName" />
-    </div>
+  <div class="flex flex-col gap-10">
     <div class="flex justify-between items-center">
       <div class="flex">
         <base-button :disabled="disablePrevious" @click="previousPage">
@@ -18,11 +12,12 @@
       </div>
       <span >{{`${pageNumber}/${pageCount}`}}</span>
     </div>
+    <galery :image-list="paginatedList" />
   </div>
 </template>
 
 <script setup lang="ts">
-import ImageItem from "./ImageItem.vue";
+import Galery from "./Galery.vue"
 import BaseButton from "./base/BaseButton.vue";
 import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
 import ChevronRight from 'vue-material-design-icons/ChevronRight.vue'

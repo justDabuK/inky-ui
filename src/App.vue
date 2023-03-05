@@ -1,9 +1,8 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col gap-10">
     <file-input class="mb-8"/>
     <span>Liste der angepassten Bilder</span>
-    <image-list :image-name-list="adjustedImages" />
-    <!-- TODO: add gallery component-->
+    <image-list :image-name-list="originalImages" />
   </div>
 </template>
 
@@ -14,10 +13,11 @@ import ImageList from "./components/ImageList.vue";
 import FileInput from "./components/FileInput.vue";
 
 const adjustedImages = ref<string[]>([]);
+const originalImages = ref<string[]>([]);
 
 onMounted(async () => {
-  const response = await API.getAdjustedImagesImagesAdjustedGet();
-  adjustedImages.value = response.data;
+  adjustedImages.value = (await API.getAdjustedImagesImagesAdjustedGet()).data;
+  originalImages.value = (await API.getOriginalImagesImagesOriginalGet()).data;
 })
 </script>
 

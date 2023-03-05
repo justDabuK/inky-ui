@@ -17,7 +17,7 @@
 import BaseButton from "./base/BaseButton.vue";
 import FileItem from "./FileItem.vue";
 import {onMounted, ref} from "vue";
-import {API} from "@/services/backend-service";
+import {API} from "../services/backend-service";
 import ProgressUpload from "vue-material-design-icons/ProgressUpload.vue"
 
 const imageUrl = ref<string | ArrayBuffer | null>(null);
