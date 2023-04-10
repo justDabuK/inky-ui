@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col gap-10">
     <h1 class="text-5xl">Inky UI</h1>
-    <file-input class="mb-8" :existing-image-names="originalImages" @uploaded-files="updateLists"/>
-    <image-list :image-name-list="originalImages" />
+    <FileInput class="mb-8" :existing-image-names="originalImages" @uploaded-files="updateLists"/>
+    <ImageList :image-name-list="originalImages" />
   </div>
 </template>
 

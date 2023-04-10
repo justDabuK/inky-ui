@@ -6,16 +6,16 @@
     </div>
     <div class="flex justify-between items-center">
       <div class="flex">
-        <base-button :disabled="disablePrevious" @click="previousPage">
-          <chevron-left />
-        </base-button>
-        <base-button :disabled="disableNext" @click="nextPage">
-          <chevron-right />
-        </base-button>
+        <BaseButton :disabled="disablePrevious" @click="previousPage">
+          <ChevronLeft />
+        </BaseButton>
+        <BaseButton :disabled="disableNext" @click="nextPage">
+          <ChevronRight />
+        </BaseButton>
       </div>
       <span >{{`${pageNumber}/${pageCount}`}}</span>
     </div>
-    <galery :image-list="paginatedList" />
+    <Galery :image-list="paginatedList" />
   </div>
 </template>
 

@@ -2,23 +2,23 @@
   <div class="flex flex-col gap-5">
     <h2 class="text-xl">Image upload</h2>
     <div>
-      <base-button @click="onPickFile">choose pictures</base-button>
+      <BaseButton @click="onPickFile">choose pictures</BaseButton>
     </div>
 
     <input ref="fileInput" type="file" class="hidden" accept="image/*" multiple @change="onFilePicked"/>
     <div v-if="imageList.length > 0" class="flex flex-col gap-10">
       <span>Files to upload</span>
       <div class="grid grid-cols-3 gap-5">
-        <image-preview v-for="(url, index) in fileUrlList" :key="url" :image-name="imageList[index].name" :src="url" >
+        <ImagePreview v-for="(url, index) in fileUrlList" :key="url" :image-name="imageList[index].name" :src="url" >
           <span>({{sizeInKb(imageList[index])}} KB)</span>
-          <check v-if="fileAlreadyExists(imageList[index].name)" />
-          <upload v-else />
-        </image-preview>
+          <Check v-if="fileAlreadyExists(imageList[index].name)" />
+          <Upload v-else />
+        </ImagePreview>
       </div>
-      <base-button :disabled="uploadingImages" @click="uploadFiles">
-        <progress-upload v-if="uploadingImages" />
+      <BaseButton :disabled="uploadingImages" @click="uploadFiles">
+        <ProgressUpload v-if="uploadingImages" />
         <span v-else>Upload images</span>
-      </base-button>
+      </BaseButton>
     </div>
   </div>
 </template>

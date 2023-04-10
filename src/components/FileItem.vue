@@ -2,8 +2,8 @@
   <div class="flex justify-between">
     <span>{{file.name}}</span>
     <span>({{sizeInKb}} KB)</span>
-    <check v-if="fileAlreadyExists" />
-    <upload v-else />
+    <Check v-if="fileAlreadyExists" />
+    <Upload v-else />
   </div>
 </template>
 
