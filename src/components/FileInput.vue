@@ -15,9 +15,8 @@
           <Upload v-else />
         </ImagePreview>
       </div>
-      <BaseButton :disabled="uploadingImages" @click="uploadFiles">
-        <ProgressUpload v-if="uploadingImages" />
-        <span v-else>Upload images</span>
+      <BaseButton :disabled="isUploadingImages" :loading="isUploadingImages" @click="uploadFiles">
+        <span>Upload images</span>
       </BaseButton>
     </div>
   </div>
@@ -28,7 +27,6 @@ import BaseButton from "./base/BaseButton.vue";
 import ImagePreview from "./ImagePreview.vue";
 import { ref } from "vue";
 import { API } from "../services/backend-service";
-import ProgressUpload from "vue-material-design-icons/ProgressUpload.vue"
 import Check from "vue-material-design-icons/Check.vue";
 import Upload from "vue-material-design-icons/Upload.vue";
 
@@ -41,7 +39,7 @@ const emit = defineEmits<{
 }>()
 const imageList = ref<File[]>([]);
 const fileUrlList = ref<(string)[]>([]);
-const uploadingImages = ref<boolean>(false);
+const isUploadingImages = ref<boolean>(false);
 
 const fileInput = ref<HTMLInputElement>();
 
@@ -80,18 +78,19 @@ function onFilePicked(event: Event) {
 
 async function uploadFiles() {
   if(props.existingImageNames.length > 0) {
-    uploadingImages.value = true;
-    imageList.value.forEach( async (imageFile) => {
-      if(!props.existingImageNames.includes(imageFile.name)) {
-        try {
-          await API.uploadFileUploadfilePost(imageFile);
-          await API.cropImageForInkyImagesCropImageNamePut(imageFile.name);
-        } finally {
-          updateExistingImageNames();
-        }
-      }
-    })
-    uploadingImages.value = false;
+    // TODO: does this work?
+    isUploadingImages.value = true;
+    await Promise.all(imageList.value.map<Promise<boolean>>((imageFile) => {
+      return new Promise((resolve) => {
+        API.uploadFileUploadfilePost(imageFile)
+          .then(() => API.cropImageForInkyImagesCropImageNamePut(imageFile.name))
+          .then(() => {
+            updateExistingImageNames();
+            resolve(true);
+          })
+      })
+    }));
+    isUploadingImages.value = false;
   }
 }
 
