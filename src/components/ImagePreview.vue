@@ -7,6 +7,7 @@
       <span >{{visibleName}}</span>
       <slot />
     </div>
+    <!-- TODO: allow this only for the gallery preview -->
     <BaseButton class="absolute bottom-4 right-4" primary :loading="isSetting" :disabled="disabled" @click="setImage">
       <Eye />
     </BaseButton>

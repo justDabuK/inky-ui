@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-5">
     <h2 class="text-xl">Image upload</h2>
     <div>
-      <BaseButton @click="onPickFile">choose pictures</BaseButton>
+      <BaseButton primary @click="onPickFile">choose pictures</BaseButton>
     </div>
 
     <input ref="fileInput" type="file" class="hidden" accept="image/*" multiple @change="onFilePicked"/>
@@ -15,7 +15,7 @@
           <Upload v-else />
         </ImagePreview>
       </div>
-      <BaseButton :disabled="isUploadingImages" :loading="isUploadingImages" @click="uploadFiles">
+      <BaseButton :disabled="isUploadingImages" :loading="isUploadingImages" primary @click="uploadFiles">
         <span>Upload images</span>
       </BaseButton>
     </div>
