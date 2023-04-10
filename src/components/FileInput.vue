@@ -9,7 +9,6 @@
     <div v-if="imageList.length > 0" class="flex flex-col gap-10">
       <span>Files to upload</span>
       <div class="grid grid-cols-3 gap-5">
-        <!-- TODO: name and picture mismatch -->
         <image-preview v-for="(url, index) in fileUrlList" :key="url" :image-name="imageList[index].name" :src="url" >
           <span>({{sizeInKb(imageList[index])}} KB)</span>
           <check v-if="fileAlreadyExists(imageList[index].name)" />
@@ -54,18 +53,27 @@ function onPickFile() {
   }
 }
 
+const waitForCondition = (condition: () => boolean) =>
+  new Promise((resolve) => {
+    const loop = () =>
+      condition() ?
+        resolve(true):
+        window.setTimeout(loop);
+    loop();
+  })
+
 function onFilePicked(event: Event) {
   const files = (event.target as HTMLInputElement).files;
   if(files !== null) {
     for( let i = 0; i< files.length; i++) {
       const fileReader = new FileReader();
-      fileReader.addEventListener('load', () => {
+      fileReader.readAsDataURL(files[i]);
+      waitForCondition(() => fileReader.readyState === fileReader.DONE).then(() => {
         if(fileReader.result) {
           fileUrlList.value.push(fileReader.result as unknown as string);
         }
+        imageList.value.push(files[i])
       });
-      fileReader.readAsDataURL(files[i]);
-      imageList.value.push(files[i]);
     }
   }
 }
