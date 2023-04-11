@@ -78,7 +78,6 @@ function onFilePicked(event: Event) {
 
 async function uploadFiles() {
   if(props.existingImageNames.length > 0) {
-    // TODO: does this work?
     isUploadingImages.value = true;
     await Promise.all(imageList.value.map<Promise<boolean>>((imageFile) => {
       return new Promise((resolve) => {
