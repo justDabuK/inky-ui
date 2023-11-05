@@ -22,21 +22,21 @@
 export interface ValidationError {
     /**
      * 
-     * @type {Array<string>}
+     * @type {any}
      * @memberof ValidationError
      */
-    'loc': Array<string>;
+    'loc': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof ValidationError
      */
-    'msg': string;
+    'msg': any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof ValidationError
      */
-    'type': string;
+    'type': any;
 }
 

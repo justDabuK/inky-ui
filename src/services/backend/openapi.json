@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.2",
+  "openapi": "3.1.0",
   "info": {
     "title": "FastAPI",
     "version": "0.1.0"
@@ -11,13 +11,13 @@
         "operationId": "set_image_images_set__image_name__put",
         "parameters": [
           {
+            "name": "image_name",
+            "in": "path",
             "required": true,
             "schema": {
-              "title": "Image Name",
-              "type": "string"
-            },
-            "name": "image_name",
-            "in": "path"
+              "type": "string",
+              "title": "Image Name"
+            }
           }
         ],
         "responses": {
@@ -64,13 +64,13 @@
         "operationId": "crop_image_for_inky_images_crop__image_name__put",
         "parameters": [
           {
+            "name": "image_name",
+            "in": "path",
             "required": true,
             "schema": {
-              "title": "Image Name",
-              "type": "string"
-            },
-            "name": "image_name",
-            "in": "path"
+              "type": "string",
+              "title": "Image Name"
+            }
           }
         ],
         "responses": {
@@ -101,13 +101,13 @@
         "operationId": "resize_image_for_inky_images_resize__image_name__put",
         "parameters": [
           {
+            "name": "image_name",
+            "in": "path",
             "required": true,
             "schema": {
-              "title": "Image Name",
-              "type": "string"
-            },
-            "name": "image_name",
-            "in": "path"
+              "type": "string",
+              "title": "Image Name"
+            }
           }
         ],
         "responses": {
@@ -206,13 +206,13 @@
         "operationId": "get_adjusted_image_file_images_adjusted_get__image_name__download_get",
         "parameters": [
           {
+            "name": "image_name",
+            "in": "path",
             "required": true,
             "schema": {
-              "title": "Image Name",
-              "type": "string"
-            },
-            "name": "image_name",
-            "in": "path"
+              "type": "string",
+              "title": "Image Name"
+            }
           }
         ],
         "responses": {
@@ -243,13 +243,13 @@
         "operationId": "get_original_image_file_images_original_get__image_name__download_get",
         "parameters": [
           {
+            "name": "image_name",
+            "in": "path",
             "required": true,
             "schema": {
-              "title": "Image Name",
-              "type": "string"
-            },
-            "name": "image_name",
-            "in": "path"
+              "type": "string",
+              "title": "Image Name"
+            }
           }
         ],
         "responses": {
@@ -273,62 +273,85 @@
           }
         }
       }
+    },
+    "/screen/resolution": {
+      "get": {
+        "summary": "Get Screen Resolution",
+        "operationId": "get_screen_resolution_screen_resolution_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
       "Body_upload_file_uploadfile__post": {
-        "title": "Body_upload_file_uploadfile__post",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "title": "File"
+          }
+        },
+        "type": "object",
         "required": [
           "file"
         ],
-        "type": "object",
-        "properties": {
-          "file": {
-            "title": "File",
-            "type": "string",
-            "format": "binary"
-          }
-        }
+        "title": "Body_upload_file_uploadfile__post"
       },
       "HTTPValidationError": {
-        "title": "HTTPValidationError",
-        "type": "object",
         "properties": {
           "detail": {
-            "title": "Detail",
-            "type": "array",
             "items": {
               "$ref": "#/components/schemas/ValidationError"
-            }
+            },
+            "type": "array",
+            "title": "Detail"
           }
-        }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
       },
       "ValidationError": {
-        "title": "ValidationError",
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
         "required": [
           "loc",
           "msg",
           "type"
         ],
-        "type": "object",
-        "properties": {
-          "loc": {
-            "title": "Location",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "msg": {
-            "title": "Message",
-            "type": "string"
-          },
-          "type": {
-            "title": "Error Type",
-            "type": "string"
-          }
-        }
+        "title": "ValidationError"
       }
     }
   }

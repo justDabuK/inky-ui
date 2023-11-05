@@ -31,11 +31,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Crop Image For Inky
-         * @param {string} imageName 
+         * @param {any} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cropImageForInkyImagesCropImageNamePut: async (imageName: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        cropImageForInkyImagesCropImageNamePut: async (imageName: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'imageName' is not null or undefined
             assertParamExists('cropImageForInkyImagesCropImageNamePut', 'imageName', imageName)
             const localVarPath = `/images/crop/{image_name}`
@@ -65,11 +65,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Get Adjusted Image File
-         * @param {string} imageName 
+         * @param {any} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet: async (imageName: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet: async (imageName: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'imageName' is not null or undefined
             assertParamExists('getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet', 'imageName', imageName)
             const localVarPath = `/images/adjusted/get/{image_name}/download`
@@ -129,11 +129,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Get Original Image File
-         * @param {string} imageName 
+         * @param {any} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOriginalImageFileImagesOriginalGetImageNameDownloadGet: async (imageName: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getOriginalImageFileImagesOriginalGetImageNameDownloadGet: async (imageName: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'imageName' is not null or undefined
             assertParamExists('getOriginalImageFileImagesOriginalGetImageNameDownloadGet', 'imageName', imageName)
             const localVarPath = `/images/original/get/{image_name}/download`
@@ -192,12 +192,42 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Resize Image For Inky
-         * @param {string} imageName 
+         * @summary Get Screen Resolution
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        resizeImageForInkyImagesResizeImageNamePut: async (imageName: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getScreenResolutionScreenResolutionGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/screen/resolution`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Resize Image For Inky
+         * @param {any} imageName 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        resizeImageForInkyImagesResizeImageNamePut: async (imageName: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'imageName' is not null or undefined
             assertParamExists('resizeImageForInkyImagesResizeImageNamePut', 'imageName', imageName)
             const localVarPath = `/images/resize/{image_name}`
@@ -227,11 +257,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Set Image
-         * @param {string} imageName 
+         * @param {any} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setImageImagesSetImageNamePut: async (imageName: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setImageImagesSetImageNamePut: async (imageName: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'imageName' is not null or undefined
             assertParamExists('setImageImagesSetImageNamePut', 'imageName', imageName)
             const localVarPath = `/images/set/{image_name}`
@@ -291,11 +321,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Upload File
-         * @param {File} file 
+         * @param {any} file 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadFileUploadfilePost: async (file: File, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadFileUploadfilePost: async (file: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'file' is not null or undefined
             assertParamExists('uploadFileUploadfilePost', 'file', file)
             const localVarPath = `/uploadfile/`;
@@ -313,7 +343,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
 
 
             if (file !== undefined) { 
-                localVarFormParams.append('file', file as any);
+                localVarFormParams.append('file', new Blob([JSON.stringify(file)], { type: "application/json", }));
             }
     
     
@@ -342,22 +372,22 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Crop Image For Inky
-         * @param {string} imageName 
+         * @param {any} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cropImageForInkyImagesCropImageNamePut(imageName: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async cropImageForInkyImagesCropImageNamePut(imageName: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.cropImageForInkyImagesCropImageNamePut(imageName, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @summary Get Adjusted Image File
-         * @param {string} imageName 
+         * @param {any} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -374,11 +404,11 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get Original Image File
-         * @param {string} imageName 
+         * @param {any} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -394,23 +424,33 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Resize Image For Inky
-         * @param {string} imageName 
+         * @summary Get Screen Resolution
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async resizeImageForInkyImagesResizeImageNamePut(imageName: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async getScreenResolutionScreenResolutionGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getScreenResolutionScreenResolutionGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Resize Image For Inky
+         * @param {any} imageName 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async resizeImageForInkyImagesResizeImageNamePut(imageName: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.resizeImageForInkyImagesResizeImageNamePut(imageName, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @summary Set Image
-         * @param {string} imageName 
+         * @param {any} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async setImageImagesSetImageNamePut(imageName: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async setImageImagesSetImageNamePut(imageName: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setImageImagesSetImageNamePut(imageName, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -427,11 +467,11 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Upload File
-         * @param {File} file 
+         * @param {any} file 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadFileUploadfilePost(file: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async uploadFileUploadfilePost(file: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadFileUploadfilePost(file, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -448,21 +488,21 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary Crop Image For Inky
-         * @param {string} imageName 
+         * @param {any} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cropImageForInkyImagesCropImageNamePut(imageName: string, options?: any): AxiosPromise<any> {
+        cropImageForInkyImagesCropImageNamePut(imageName: any, options?: any): AxiosPromise<any> {
             return localVarFp.cropImageForInkyImagesCropImageNamePut(imageName, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Get Adjusted Image File
-         * @param {string} imageName 
+         * @param {any} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName: string, options?: any): AxiosPromise<any> {
+        getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName: any, options?: any): AxiosPromise<any> {
             return localVarFp.getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName, options).then((request) => request(axios, basePath));
         },
         /**
@@ -477,11 +517,11 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary Get Original Image File
-         * @param {string} imageName 
+         * @param {any} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName: string, options?: any): AxiosPromise<any> {
+        getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName: any, options?: any): AxiosPromise<any> {
             return localVarFp.getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName, options).then((request) => request(axios, basePath));
         },
         /**
@@ -495,22 +535,31 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary Resize Image For Inky
-         * @param {string} imageName 
+         * @summary Get Screen Resolution
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        resizeImageForInkyImagesResizeImageNamePut(imageName: string, options?: any): AxiosPromise<any> {
+        getScreenResolutionScreenResolutionGet(options?: any): AxiosPromise<any> {
+            return localVarFp.getScreenResolutionScreenResolutionGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Resize Image For Inky
+         * @param {any} imageName 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        resizeImageForInkyImagesResizeImageNamePut(imageName: any, options?: any): AxiosPromise<any> {
             return localVarFp.resizeImageForInkyImagesResizeImageNamePut(imageName, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Set Image
-         * @param {string} imageName 
+         * @param {any} imageName 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setImageImagesSetImageNamePut(imageName: string, options?: any): AxiosPromise<any> {
+        setImageImagesSetImageNamePut(imageName: any, options?: any): AxiosPromise<any> {
             return localVarFp.setImageImagesSetImageNamePut(imageName, options).then((request) => request(axios, basePath));
         },
         /**
@@ -525,11 +574,11 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary Upload File
-         * @param {File} file 
+         * @param {any} file 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadFileUploadfilePost(file: File, options?: any): AxiosPromise<any> {
+        uploadFileUploadfilePost(file: any, options?: any): AxiosPromise<any> {
             return localVarFp.uploadFileUploadfilePost(file, options).then((request) => request(axios, basePath));
         },
     };
@@ -545,24 +594,24 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @summary Crop Image For Inky
-     * @param {string} imageName 
+     * @param {any} imageName 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public cropImageForInkyImagesCropImageNamePut(imageName: string, options?: AxiosRequestConfig) {
+    public cropImageForInkyImagesCropImageNamePut(imageName: any, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).cropImageForInkyImagesCropImageNamePut(imageName, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Get Adjusted Image File
-     * @param {string} imageName 
+     * @param {any} imageName 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName: string, options?: AxiosRequestConfig) {
+    public getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName: any, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).getAdjustedImageFileImagesAdjustedGetImageNameDownloadGet(imageName, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -580,12 +629,12 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @summary Get Original Image File
-     * @param {string} imageName 
+     * @param {any} imageName 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName: string, options?: AxiosRequestConfig) {
+    public getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName: any, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).getOriginalImageFileImagesOriginalGetImageNameDownloadGet(imageName, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -602,25 +651,36 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
-     * @summary Resize Image For Inky
-     * @param {string} imageName 
+     * @summary Get Screen Resolution
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public resizeImageForInkyImagesResizeImageNamePut(imageName: string, options?: AxiosRequestConfig) {
+    public getScreenResolutionScreenResolutionGet(options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getScreenResolutionScreenResolutionGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Resize Image For Inky
+     * @param {any} imageName 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public resizeImageForInkyImagesResizeImageNamePut(imageName: any, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).resizeImageForInkyImagesResizeImageNamePut(imageName, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Set Image
-     * @param {string} imageName 
+     * @param {any} imageName 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public setImageImagesSetImageNamePut(imageName: string, options?: AxiosRequestConfig) {
+    public setImageImagesSetImageNamePut(imageName: any, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).setImageImagesSetImageNamePut(imageName, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -638,12 +698,12 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @summary Upload File
-     * @param {File} file 
+     * @param {any} file 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public uploadFileUploadfilePost(file: File, options?: AxiosRequestConfig) {
+    public uploadFileUploadfilePost(file: any, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).uploadFileUploadfilePost(file, options).then((request) => request(this.axios, this.basePath));
     }
 }
