@@ -99,12 +99,13 @@ function onFilePicked(event: Event) {
 async function uploadFiles() {
   if (props.existingImageNames.length > 0) {
     isUploadingImages.value = true;
+    // TODO: this does not work for some reason
     await Promise.all(
       imageList.value.map<Promise<boolean>>((imageFile) => {
         return new Promise((resolve) => {
           API.uploadFileUploadfilePost(imageFile)
             .then(() =>
-              API.cropImageForInkyImagesCropImageNamePut(imageFile.name)
+              API.adjustImageForInkyImagesAdjustImageNamePut(imageFile.name)
             )
             .then(() => {
               updateExistingImageNames();

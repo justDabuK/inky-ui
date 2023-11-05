@@ -20,7 +20,7 @@
       class="absolute bottom-4 right-4"
       primary
       :loading="isSetting"
-      :disabled="disabled"
+      :disabled="disabled || !adjustedImageName"
       @click="setImage"
     >
       <Eye />
@@ -38,6 +38,7 @@ import { API } from '../services/backend-service';
 const props = defineProps<{
   src: string;
   imageName: string;
+  adjustedImageName?: string;
   disabled?: boolean;
   width: number;
   height: number;
@@ -54,14 +55,10 @@ const visibleName = computed(() =>
 
 const isSetting = ref(false);
 
-const adjustedImageName = computed(() => {
-  const splitName = props.imageName.split('.');
-  return `${splitName[0]}_cropped_rotated.${splitName[1]}`;
-});
 const setImage = async () => {
   isSetting.value = true;
   emit('setting-image');
-  await API.setImageImagesSetImageNamePut(adjustedImageName.value);
+  await API.setImageImagesSetImageNamePut(props.adjustedImageName);
   emit('finished-setting');
   isSetting.value = false;
 };

@@ -95,6 +95,43 @@
         }
       }
     },
+    "/images/adjust/{image_name}": {
+      "put": {
+        "summary": "Adjust Image For Inky",
+        "operationId": "adjust_image_for_inky_images_adjust__image_name__put",
+        "parameters": [
+          {
+            "name": "image_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Image Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/images/resize/{image_name}": {
       "put": {
         "summary": "Resize Image For Inky",
