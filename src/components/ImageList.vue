@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import Galery from './Galery.vue';
+import Galery from './Gallery.vue';
 import BaseButton from './base/BaseButton.vue';
 import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue';
 import ChevronRight from 'vue-material-design-icons/ChevronRight.vue';

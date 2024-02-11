@@ -1,7 +1,11 @@
 <template>
   <!-- TODO: make name and "set"-button only appear on hover -->
   <!-- TODO: support deleting items -->
-  <div ref="imageContainer" class="image-container">
+  <div
+    ref="imageContainer"
+    class="image-container"
+    :style="`grid-row: span ${desiredContainerHeight / 10}`"
+  >
     <!-- TODO: get rid of tailwind here and calculate the image size based on the input-->
     <img ref="image" :src="src" alt="first image" />
     <div class="name-container">
@@ -22,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import _ from 'lodash';
 import BaseButton from './base/BaseButton.vue';
 import Eye from 'vue-material-design-icons/Eye.vue';
@@ -54,6 +58,40 @@ const setImage = async () => {
   emit('finished-setting');
   isSetting.value = false;
 };
+
+const isLoading = ref(true);
+
+const image = ref<HTMLImageElement | null>(null);
+const imageContainer = ref<HTMLDivElement | null>(null);
+
+onMounted(() => {
+  if (image.value) {
+    image.value.onload = () => {
+      isLoading.value = false;
+    };
+  }
+});
+
+const containerWidthToActualWidthRatio = computed(() =>
+  image.value && imageContainer.value
+    ? imageContainer.value.clientWidth / image.value.naturalWidth
+    : 0
+);
+
+const desiredContainerHeight = computed(() => {
+  if (isLoading.value) {
+    return 700;
+  }
+  if (image.value) {
+    return (
+      Math.ceil(
+        (image.value.naturalHeight * containerWidthToActualWidthRatio.value) /
+          10
+      ) * 10
+    );
+  }
+  return 0;
+});
 </script>
 
 <style scoped>
@@ -63,12 +101,15 @@ const setImage = async () => {
   place-items: center;
   background-color: var(--background-color-lighter);
   border-radius: 0.25rem;
+  padding: 10px;
+  margin: 10px;
 }
 
 img {
   border-radius: 0.25rem;
   object-fit: contain;
   max-width: 100%;
+  max-height: 100%;
 }
 
 .name-container {
