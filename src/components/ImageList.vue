@@ -34,7 +34,7 @@ const searchTerm = ref('');
 
 const pageNumber = ref(0);
 
-const itemsPerPage = 10;
+const itemsPerPage = 20;
 
 const disablePrevious = computed(() => pageNumber.value === 0);
 const disableNext = computed(() => pageNumber.value === pageCount.value);
