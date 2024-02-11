@@ -65,7 +65,6 @@ const setImage = async () => {
   border-radius: 0.25rem;
 }
 
-/* TODO: make the preview just always show the whole image */
 img {
   border-radius: 0.25rem;
   object-fit: contain;
