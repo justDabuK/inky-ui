@@ -61,7 +61,7 @@ const setImage = async () => {
   position: relative;
   display: grid;
   place-items: center;
-  background-color: oklch(30% 0 0);
+  background-color: var(--background-color-lighter);
   border-radius: 0.25rem;
 }
 
@@ -74,10 +74,10 @@ img {
 .name-container {
   position: absolute;
   border-radius: 0.25rem;
-  background-color: rgb(31 41 55 / 0.9);
+  background-color: var(--secondary-color-transparent);
   top: 1rem;
   right: 1rem;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
   display: flex;
   justify-content: space-between;
   gap: 1.25rem;

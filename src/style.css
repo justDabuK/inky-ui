@@ -32,9 +32,19 @@ li {
   line-height: 24px;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: oklch(26.03% 0 0);
+  color-scheme: dark;
+  --text-color: oklch(95% 0 0);
+  --background-color: oklch(26.03% 0 0);
+  --background-color-lighter: oklch(30% 0 0);
+  --primary-color: oklch(60.02% 0.104 184.7);
+  --primary-color-hover: oklch(51.09% 0.086 186.39);
+  --primary-color-disabled: oklch(38.61% 0.059 188.42);
+  --secondary-color: oklch(21.78% 0 0);
+  --secondary-color-transparent: oklch(21.78% 0 0 / 0.75);
+
+  color: var(--text-color);
+  background-color: var(--background-color);
+
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

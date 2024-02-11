@@ -25,26 +25,25 @@ button {
   border: 1px solid transparent;
   padding: 0.5rem 1rem;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 400;
   font-family: inherit;
   cursor: pointer;
 }
 
 .primary {
-  /* TODO: move colors to central place */
-  background-color: rgb(13 148 136);
+  background-color: var(--primary-color);
 
   &:hover {
-    background-color: rgb(15 118 110);
+    background-color: var(--primary-color-hover);
   }
 
   &:disabled {
-    background-color: rgb(19 78 74);
+    background-color: var(--primary-color-disabled);
   }
 }
 
 .secondary {
-  background-color: #1a1a1a;
+  background-color: var(--secondary-color);
 
   &:disabled {
     opacity: 0.5;

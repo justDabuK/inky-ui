@@ -96,14 +96,14 @@ function previousPage() {
     }
 
     input {
-      background-color: #1a1a1a;
+      background-color: var(--secondary-color);
       border-radius: 0.25rem;
       padding: 0.5rem;
       font: inherit;
       border: 0;
 
       &:focus {
-        outline: solid rgb(13 148 136);
+        outline: solid var(--primary-color);
       }
     }
   }
