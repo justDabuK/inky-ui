@@ -56,6 +56,7 @@ onMounted(() => {
   gap: 3.5rem;
 }
 
+/* TODO: put headline definitions to central place */
 h1 {
   font-size: 3rem;
   line-height: 1.5;
