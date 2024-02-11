@@ -1,19 +1,17 @@
 <template>
   <div class="image-list-container">
     <h2>List of images</h2>
-    <div class="search-container">
-      <input v-model="searchTerm" placeholder="enter a search term" />
-    </div>
     <div class="pagination-container">
-      <div>
+      <div class="button-container">
         <BaseButton :disabled="disablePrevious" @click="previousPage">
           <ChevronLeft />
         </BaseButton>
         <BaseButton :disabled="disableNext" @click="nextPage">
           <ChevronRight />
         </BaseButton>
+        <span class="page-count">{{ `${pageNumber}/${pageCount}` }}</span>
       </div>
-      <span>{{ `${pageNumber}/${pageCount}` }}</span>
+      <input v-model="searchTerm" placeholder="enter a search term" />
     </div>
     <Galery :image-list="paginatedList" :width="width" :height="height" />
   </div>
@@ -80,9 +78,22 @@ function previousPage() {
     text-align: center;
   }
 
-  .search-container {
+  .pagination-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+
+    .button-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .page-count {
+        font-size: 1.25rem;
+        margin-left: 0.5rem;
+      }
+    }
 
     input {
       background-color: #1a1a1a;
@@ -95,12 +106,6 @@ function previousPage() {
         outline: solid rgb(13 148 136);
       }
     }
-  }
-
-  .pagination-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
 }
 </style>
