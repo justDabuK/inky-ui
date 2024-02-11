@@ -20,6 +20,16 @@ defineProps<{
 </script>
 
 <style scoped>
+button {
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  padding: 0.5rem 1rem;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+}
+
 .primary {
   /* TODO: move colors to central place */
   background-color: rgb(13 148 136);
@@ -34,6 +44,8 @@ defineProps<{
 }
 
 .secondary {
+  background-color: #1a1a1a;
+
   &:disabled {
     opacity: 0.5;
   }

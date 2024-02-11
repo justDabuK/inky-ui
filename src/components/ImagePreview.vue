@@ -66,9 +66,10 @@ const setImage = async () => {
 }
 
 /* TODO: make the preview just always show the whole image */
-image {
+img {
   border-radius: 0.25rem;
   object-fit: contain;
+  max-width: 100%;
 }
 
 .name-container {
