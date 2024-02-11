@@ -1,7 +1,7 @@
 <template>
-  <button class="active:animate-ping" :class="primary ? 'bg-teal-600 hover:bg-teal-700 disabled:bg-teal-900' : 'disabled:opacity-50'" :disabled="disabled">
-    <div :class="disabled && 'opacity-50'">
-      <div v-if="loading" class="animate-spin">
+  <button :class="primary ? 'primary' : 'secondary'" :disabled="disabled">
+    <div class="content-container">
+      <div v-if="loading" class="loading-spinner">
         <Loading />
       </div>
       <slot v-else />
@@ -10,11 +10,48 @@
 </template>
 
 <script setup lang="ts">
-import Loading from 'vue-material-design-icons/Loading.vue'
+import Loading from 'vue-material-design-icons/Loading.vue';
 
 defineProps<{
-  disabled?: boolean
-  primary?: boolean
-  loading?: boolean
-}>()
+  disabled?: boolean;
+  primary?: boolean;
+  loading?: boolean;
+}>();
 </script>
+
+<style scoped>
+.primary {
+  /* TODO: move colors to central place */
+  background-color: rgb(13 148 136);
+
+  &:hover {
+    background-color: rgb(15 118 110);
+  }
+
+  &:disabled {
+    background-color: rgb(19 78 74);
+  }
+}
+
+.secondary {
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.content-container {
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
