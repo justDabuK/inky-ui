@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col gap-5">
-    <h2 class="text-xl">Image upload</h2>
+  <div class="file-upload-container">
+    <h2>Image upload</h2>
     <div>
       <BaseButton primary @click="onPickFile">choose pictures</BaseButton>
     </div>
@@ -8,14 +8,13 @@
     <input
       ref="fileInput"
       type="file"
-      class="hidden"
       accept="image/*"
       multiple
       @change="onFilePicked"
     />
-    <div v-if="imageList.length > 0" class="flex flex-col gap-10">
+    <div v-if="imageList.length > 0" class="image-list-container">
       <span>Files to upload</span>
-      <div :class="`grid grid-cols-2 gap-5`">
+      <div class="image-gallery">
         <ImagePreview
           v-for="(url, index) in fileUrlList"
           :key="url"
@@ -126,3 +125,33 @@ function sizeInKb(file: File) {
   return Math.floor(file.size / 1024);
 }
 </script>
+
+<style scoped>
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+input {
+  display: none;
+}
+
+.image-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.image-gallery {
+  display: grid;
+  /* TODO: replace 448 with prover variable */
+  grid-template-columns: repeat(auto-fill, minmax(448px, 1fr));
+  gap: 1.25rem;
+}
+</style>
