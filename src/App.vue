@@ -1,8 +1,7 @@
 <template>
-  <div class="flex flex-col gap-10">
-    <h1 class="text-5xl">Inky UI</h1>
+  <h1>Inky UI</h1>
+  <div class="site-container">
     <FileInput
-      class="mb-8"
       :existing-image-names="originalImages"
       :width="displayResolution.width"
       :height="displayResolution.height"
@@ -50,4 +49,16 @@ onMounted(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.site-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+</style>
