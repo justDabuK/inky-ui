@@ -55,11 +55,4 @@ onMounted(() => {
   flex-direction: column;
   gap: 3.5rem;
 }
-
-/* TODO: put headline definitions to central place */
-h1 {
-  font-size: 3rem;
-  line-height: 1.5;
-  margin-bottom: 1.5rem;
-}
 </style>

@@ -1,15 +1,11 @@
 <template>
-  <div class="flex flex-col gap-10">
-    <h2 class="text-xl">List of images</h2>
-    <div class="flex justify-center">
-      <input
-        v-model="searchTerm"
-        placeholder="enter a search term"
-        class="p-2 rounded"
-      />
+  <div class="image-list-container">
+    <h2>List of images</h2>
+    <div class="search-container">
+      <input v-model="searchTerm" placeholder="enter a search term" />
     </div>
-    <div class="flex justify-between items-center">
-      <div class="flex">
+    <div class="pagination-container">
+      <div>
         <BaseButton :disabled="disablePrevious" @click="previousPage">
           <ChevronLeft />
         </BaseButton>
@@ -74,4 +70,26 @@ function previousPage() {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.image-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+
+  .search-container {
+    display: flex;
+    justify-content: center;
+
+    input {
+      border-radius: 0.25rem;
+      padding: 0.5rem;
+    }
+  }
+
+  .pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+</style>

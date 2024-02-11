@@ -133,12 +133,6 @@ function sizeInKb(file: File) {
   gap: 1.25rem;
 }
 
-/* TODO: put headline definitions to central place */
-h2 {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
 input {
   display: none;
 }
