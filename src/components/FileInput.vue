@@ -1,9 +1,7 @@
 <template>
   <div class="file-upload-container">
     <h2>Image upload</h2>
-    <div>
-      <BaseButton primary @click="onPickFile">choose pictures</BaseButton>
-    </div>
+    <BaseButton primary @click="onPickFile">choose pictures</BaseButton>
 
     <input
       ref="fileInput"
@@ -13,7 +11,8 @@
       @change="onFilePicked"
     />
     <div v-if="imageList.length > 0" class="image-list-container">
-      <span>Files to upload</span>
+      <h3>Files to upload</h3>
+      <!-- TODO: why is this not the same as the gallery?-->
       <div class="image-gallery">
         <ImagePreview
           v-for="(url, index) in fileUrlList"
@@ -130,7 +129,12 @@ function sizeInKb(file: File) {
 .file-upload-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1.25rem;
+
+  h2 {
+    text-align: center;
+  }
 }
 
 input {
@@ -138,15 +142,20 @@ input {
 }
 
 .image-list-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+
+  h3 {
+    text-align: center;
+  }
 }
 
 .image-gallery {
   display: grid;
   /* TODO: replace 448 with prover variable */
-  grid-template-columns: repeat(auto-fill, minmax(448px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.25rem;
 }
 </style>

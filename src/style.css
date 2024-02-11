@@ -10,7 +10,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: oklch(26.03% 0 0);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -54,10 +54,8 @@ button {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
+  width: 100%;
   padding: 2rem;
-  text-align: center;
 }
 
 h1 {
@@ -67,6 +65,11 @@ h1 {
 }
 
 h2 {
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+}
+
+h3 {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }

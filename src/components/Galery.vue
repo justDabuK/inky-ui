@@ -1,5 +1,5 @@
 <template>
-  <div :class="`grid grid-cols-2 gap-5`">
+  <div class="gallery">
     <ImagePreview
       v-for="imageName in imageList"
       :key="imageName"
@@ -27,3 +27,11 @@ defineProps<{
 
 const isImagesDisabled = ref(false);
 </script>
+
+<style scoped>
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+</style>

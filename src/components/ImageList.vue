@@ -76,6 +76,10 @@ function previousPage() {
   flex-direction: column;
   gap: 2.5rem;
 
+  h2 {
+    text-align: center;
+  }
+
   .search-container {
     display: flex;
     justify-content: center;

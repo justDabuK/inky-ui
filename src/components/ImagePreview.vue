@@ -3,12 +3,7 @@
   <!-- TODO: support deleting items -->
   <div ref="imageContainer" class="image-container">
     <!-- TODO: get rid of tailwind here and calculate the image size based on the input-->
-    <img
-      ref="image"
-      :src="src"
-      alt="first image"
-      :class="width > 450 ? 'big-image' : 'small-image'"
-    />
+    <img ref="image" :src="src" alt="first image" />
     <div class="name-container">
       <span>{{ visibleName }}</span>
       <slot />
@@ -64,21 +59,16 @@ const setImage = async () => {
 <style scoped>
 .image-container {
   position: relative;
+  display: grid;
+  place-items: center;
+  background-color: oklch(30% 0 0);
+  border-radius: 0.25rem;
 }
 
 /* TODO: make the preview just always show the whole image */
-.small-image {
+image {
   border-radius: 0.25rem;
-  width: 448px;
-  height: 600px;
-  object-fit: none;
-}
-
-.big-image {
-  border-radius: 0.25rem;
-  width: 480px;
-  height: 800px;
-  object-fit: none;
+  object-fit: contain;
 }
 
 .name-container {
