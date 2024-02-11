@@ -85,8 +85,15 @@ function previousPage() {
     justify-content: center;
 
     input {
+      background-color: #1a1a1a;
       border-radius: 0.25rem;
       padding: 0.5rem;
+      font: inherit;
+      border: 0;
+
+      &:focus {
+        outline: solid rgb(13 148 136);
+      }
     }
   }
 
