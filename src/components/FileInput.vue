@@ -103,14 +103,10 @@ async function uploadFiles() {
     await Promise.all(
       imageList.value.map<Promise<boolean>>((imageFile) => {
         return new Promise((resolve) => {
-          API.uploadFileUploadfilePost(imageFile)
-            .then(() =>
-              API.adjustImageForInkyImagesAdjustImageNamePut(imageFile.name)
-            )
-            .then(() => {
-              updateExistingImageNames();
-              resolve(true);
-            });
+          API.uploadFileUploadfilePost(imageFile).then(() => {
+            updateExistingImageNames();
+            resolve(true);
+          });
         });
       })
     );

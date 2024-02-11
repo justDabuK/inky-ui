@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.2",
   "info": {
     "title": "FastAPI",
     "version": "0.1.0"
@@ -11,13 +11,13 @@
         "operationId": "set_image_images_set__image_name__put",
         "parameters": [
           {
-            "name": "image_name",
-            "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "title": "Image Name"
-            }
+              "title": "Image Name",
+              "type": "string"
+            },
+            "name": "image_name",
+            "in": "path"
           }
         ],
         "responses": {
@@ -52,117 +52,6 @@
             "content": {
               "application/json": {
                 "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/images/crop/{image_name}": {
-      "put": {
-        "summary": "Crop Image For Inky",
-        "operationId": "crop_image_for_inky_images_crop__image_name__put",
-        "parameters": [
-          {
-            "name": "image_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Image Name"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/images/adjust/{image_name}": {
-      "put": {
-        "summary": "Adjust Image For Inky",
-        "operationId": "adjust_image_for_inky_images_adjust__image_name__put",
-        "parameters": [
-          {
-            "name": "image_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Image Name"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/images/resize/{image_name}": {
-      "put": {
-        "summary": "Resize Image For Inky",
-        "operationId": "resize_image_for_inky_images_resize__image_name__put",
-        "parameters": [
-          {
-            "name": "image_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Image Name"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
               }
             }
           }
@@ -221,72 +110,19 @@
         }
       }
     },
-    "/images/adjusted/": {
-      "get": {
-        "summary": "Get Adjusted Images",
-        "operationId": "get_adjusted_images_images_adjusted__get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/images/adjusted/get/{image_name}/download": {
-      "get": {
-        "summary": "Get Adjusted Image File",
-        "operationId": "get_adjusted_image_file_images_adjusted_get__image_name__download_get",
-        "parameters": [
-          {
-            "name": "image_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Image Name"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/images/original/get/{image_name}/download": {
       "get": {
         "summary": "Get Original Image File",
         "operationId": "get_original_image_file_images_original_get__image_name__download_get",
         "parameters": [
           {
-            "name": "image_name",
-            "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "title": "Image Name"
-            }
+              "title": "Image Name",
+              "type": "string"
+            },
+            "name": "image_name",
+            "in": "path"
           }
         ],
         "responses": {
@@ -331,64 +167,57 @@
   "components": {
     "schemas": {
       "Body_upload_file_uploadfile__post": {
-        "properties": {
-          "file": {
-            "type": "string",
-            "format": "binary",
-            "title": "File"
-          }
-        },
-        "type": "object",
+        "title": "Body_upload_file_uploadfile__post",
         "required": [
           "file"
         ],
-        "title": "Body_upload_file_uploadfile__post"
+        "type": "object",
+        "properties": {
+          "file": {
+            "title": "File",
+            "type": "string",
+            "format": "binary"
+          }
+        }
       },
       "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
         "properties": {
           "detail": {
+            "title": "Detail",
+            "type": "array",
             "items": {
               "$ref": "#/components/schemas/ValidationError"
-            },
-            "type": "array",
-            "title": "Detail"
+            }
           }
-        },
-        "type": "object",
-        "title": "HTTPValidationError"
+        }
       },
       "ValidationError": {
-        "properties": {
-          "loc": {
-            "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "type": "array",
-            "title": "Location"
-          },
-          "msg": {
-            "type": "string",
-            "title": "Message"
-          },
-          "type": {
-            "type": "string",
-            "title": "Error Type"
-          }
-        },
-        "type": "object",
+        "title": "ValidationError",
         "required": [
           "loc",
           "msg",
           "type"
         ],
-        "title": "ValidationError"
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
       }
     }
   }

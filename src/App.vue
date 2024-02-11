@@ -10,7 +10,6 @@
     />
     <ImageList
       :image-name-list="originalImages"
-      :adjusted-image-name-list="adjustedImages"
       :width="displayResolution.width"
       :height="displayResolution.height"
     />
@@ -23,7 +22,6 @@ import { onMounted, ref } from 'vue';
 import ImageList from './components/ImageList.vue';
 import FileInput from './components/FileInput.vue';
 
-const adjustedImages = ref<string[]>([]);
 const originalImages = ref<string[]>([]);
 
 const WIDTH_INDEX = 1;
@@ -41,9 +39,6 @@ const loadResolution = async () => {
 };
 
 const updateLists = async () => {
-  adjustedImages.value = (
-    await API.getAdjustedImagesImagesAdjustedGet()
-  ).data.sort();
   originalImages.value = (
     await API.getOriginalImagesImagesOriginalGet()
   ).data.sort();

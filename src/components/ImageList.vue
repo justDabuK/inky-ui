@@ -19,12 +19,7 @@
       </div>
       <span>{{ `${pageNumber}/${pageCount}` }}</span>
     </div>
-    <Galery
-      :image-list="paginatedList"
-      :adjusted-image-name-list="adjustedImageNameList"
-      :width="width"
-      :height="height"
-    />
+    <Galery :image-list="paginatedList" :width="width" :height="height" />
   </div>
 </template>
 
@@ -37,7 +32,6 @@ import { computed, ref } from 'vue';
 
 const props = defineProps<{
   imageNameList: string[];
-  adjustedImageNameList: string[];
   width: number;
   height: number;
 }>();

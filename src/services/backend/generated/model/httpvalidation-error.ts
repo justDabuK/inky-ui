@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { ValidationError } from './validation-error';
 
 /**
  * 
@@ -22,9 +25,9 @@
 export interface HTTPValidationError {
     /**
      * 
-     * @type {any}
+     * @type {Array<ValidationError>}
      * @memberof HTTPValidationError
      */
-    'detail'?: any;
+    'detail'?: Array<ValidationError>;
 }
 
