@@ -1,23 +1,21 @@
 <template>
   <!-- TODO: make name and "set"-button only appear on hover -->
   <!-- TODO: support deleting items -->
-  <div ref="imageContainer" class="relative">
+  <div ref="imageContainer" class="image-container">
     <!-- TODO: get rid of tailwind here and calculate the image size based on the input-->
     <img
       ref="image"
       :src="src"
       alt="first image"
-      :class="`${classMap[width > 450 ? 'big' : 'small']}`"
+      :class="width > 450 ? 'big-image' : 'small-image'"
     />
-    <div
-      class="absolute rounded bg-gray-800/90 top-4 right-4 px-4 flex justify-between gap-5"
-    >
+    <div class="name-container">
       <span>{{ visibleName }}</span>
       <slot />
     </div>
     <!-- TODO: allow this only for the gallery preview -->
     <BaseButton
-      class="absolute bottom-4 right-4"
+      class="action-button"
       primary
       :loading="isSetting"
       :disabled="disabled"
@@ -61,9 +59,43 @@ const setImage = async () => {
   emit('finished-setting');
   isSetting.value = false;
 };
-
-const classMap = {
-  small: 'rounded w-[448px] h-[600px] object-none',
-  big: 'rounded w-[480px] h-[800px] object-none',
-};
 </script>
+
+<style scoped>
+.image-container {
+  position: relative;
+}
+
+/* TODO: make the preview just always show the whole image */
+.small-image {
+  border-radius: 0.25rem;
+  width: 448px;
+  height: 600px;
+  object-fit: none;
+}
+
+.big-image {
+  border-radius: 0.25rem;
+  width: 480px;
+  height: 800px;
+  object-fit: none;
+}
+
+.name-container {
+  position: absolute;
+  border-radius: 0.25rem;
+  background-color: rgb(31 41 55 / 0.9);
+  top: 1rem;
+  right: 1rem;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.action-button {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+</style>
