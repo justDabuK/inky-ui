@@ -155,6 +155,6 @@ input {
 .image-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.25rem;
+  grid-auto-rows: 10px;
 }
 </style>
