@@ -101,8 +101,8 @@ const desiredContainerHeight = computed(() => {
   place-items: center;
   background-color: var(--background-color-lighter);
   border-radius: 0.25rem;
-  padding: 10px;
-  margin: 10px;
+  padding: 0.5rem;
+  margin: 0.5rem;
 }
 
 img {
@@ -116,8 +116,8 @@ img {
   position: absolute;
   border-radius: 0.25rem;
   background-color: var(--secondary-color-transparent);
-  top: 1rem;
-  right: 1rem;
+  top: 0.5rem;
+  right: 0.5rem;
   padding: 0.5rem 1rem;
   display: flex;
   justify-content: space-between;
@@ -126,7 +126,7 @@ img {
 
 .action-button {
   position: absolute;
-  bottom: 1rem;
-  right: 1rem;
+  bottom: 0.5rem;
+  right: 0.5rem;
 }
 </style>
